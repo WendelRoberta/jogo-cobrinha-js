@@ -6,6 +6,8 @@ cobrinha[0] = {
     x: 8 * box,
     y: 8 * box
 }
+let direction = "right";
+
 
 function criarBG() {
     context.fillStyle = "lightblue";
@@ -21,5 +23,26 @@ function criarCobrinha() {
 
 }
 
-criarBG();
-criarCobrinha();
+function iniciarJogo() {
+    criarBG();
+    criarCobrinha();
+
+    let cobrinhaX = cobrinha[0].x;
+    let cobrinhaY = cobrinha[0].y;
+
+    if (direction == "right") cobrinhaX += box;
+    if (direction == "left") cobrinhaX -= box;
+    if (direction == "up") cobrinhaY -= box;
+    if (direction == "down") cobrinhaY += box;
+
+    cobrinha.pop();
+
+    let newHead = {
+        x: cobrinhaX,
+        y: cobrinhaY
+    }
+    cobrinha.unshift(newHead);
+
+}
+
+let jogo = setInterval(iniciarJogo, 100);
