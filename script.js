@@ -22,7 +22,6 @@ function criarCobrinha() {
     for (i = 0; i < cobrinha.length; i++) {
         context.fillStyle = "purple";
         context.fillRect(cobrinha[i].x, cobrinha[i].y, box, box);
-
     }
 }
 
@@ -35,13 +34,14 @@ document.addEventListener('keydown', update);
 
 function update(event) {
     if (event.keyCode == 37 && direction != 'right') direction = 'left';
-    if (event.ketCode == 38 && direction != 'down') direction = 'up';
+    if (event.keyCode == 38 && direction != 'down') direction = 'up';
     if (event.keyCode == 39 && direction != 'left') direction = 'right';
     if (event.keyCode == 40 && direction != 'up') direction = 'down';
 }
 
 
 function iniciarJogo() {
+
     if (cobrinha[0].x > 15 * box && direction == "right") cobrinha[0].x = 0;
     if (cobrinha[0].x < 0 && direction == 'left') cobrinha[0].x = 16 * box;
     if (cobrinha[0].y > 15 * box && direction == "down") cobrinha[0].y = 0;
@@ -59,7 +59,12 @@ function iniciarJogo() {
     if (direction == "up") cobrinhaY -= box;
     if (direction == "down") cobrinhaY += box;
 
-    cobrinha.pop();
+    if (cobrinhaX != food.x || cobrinhaY != food.y) {
+        cobrinha.pop();
+    } else {
+        food.x = Math.floor(Math.random() * 15 + 1) * box;
+        food.y = Math.floor(Math.random() * 15 + 1) * box;
+    }
 
     let newHead = {
         x: cobrinhaX,
