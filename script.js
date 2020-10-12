@@ -47,6 +47,13 @@ function iniciarJogo() {
     if (cobrinha[0].y > 15 * box && direction == "down") cobrinha[0].y = 0;
     if (cobrinha[0].y < 0 && direction == 'up') cobrinha[0].y = 16 * box;
 
+    for (i = 1; i < cobrinha.length; i++) {
+        if (cobrinha[0].x == cobrinha[i].x && cobrinha[0].y == cobrinha[i].y) {
+            clearInterval(jogo);
+            alert("Game over :'c ");
+        }
+    }
+
     criarBG();
     criarCobrinha();
     drawFood();
